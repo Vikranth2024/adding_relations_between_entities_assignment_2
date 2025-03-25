@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ProductCard from './components/ProductCard';
+import ProductCard from './ProductCard';
 import './App.css';
 
 const initialProducts = [
@@ -28,16 +28,41 @@ const initialProducts = [
     totalRatings: 8
   }
 ];
+const App = () => {
+  const [products, setProducts] = useState(initialProducts);
 
-function App() {
-
- 
+  const handleRatingSubmit = (productId, newRating) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) => {
+        if (product.id === productId) {
+          const newAvgRating =
+            (product.avgRating * product.totalRatings + newRating) /
+            (product.totalRatings + 1);
+          return {
+            ...product,
+            avgRating: newAvgRating,
+            totalRatings: product.totalRatings + 1
+          };
+        }
+        return product;
+      })
+    );
+  };
 
   return (
     <div>
-     {/* code here */}
+      <h1>Product Ratings</h1>
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onRatingSubmit={handleRatingSubmit}
+          />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
