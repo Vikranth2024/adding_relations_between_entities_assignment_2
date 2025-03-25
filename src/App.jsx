@@ -36,8 +36,7 @@ const App = () => {
       prevProducts.map((product) => {
         if (product.id === productId) {
           const newAvgRating =
-            (product.avgRating * product.totalRatings + newRating) /
-            (product.totalRatings + 1);
+            (product.avgRating * product.totalRatings + newRating) / (product.totalRatings + 1);
           return {
             ...product,
             avgRating: newAvgRating,

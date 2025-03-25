@@ -7,7 +7,7 @@ const RatingWidget = ({ productId, onRatingSubmit }) => {
   const handleSubmit = () => {
     if (rating >= 1 && rating <= 5) {
       onRatingSubmit(productId, rating);
-      setRating(0); // Reset rating
+      setRating(0); 
     } else {
       alert("Please select a valid rating before submitting!");
     }
